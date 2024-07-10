@@ -1304,7 +1304,9 @@ function! s:EasyMotion(regexp, direction, visualmode, is_inclusive, ...) " {{{
                     " FIXME: Hmm... I should use filter()
                     " keepjumps call cursor(foldclosed(pos[0]), 0)
                 else
-                    keepjumps call cursor(foldclosedend(pos[0]+1), 0)
+                    if foldclosedend(pos[0]+1) != -1
+                        keepjumps call cursor(foldclosedend(pos[0]+1), 0)
+                    endif
                 endif
             else
                 call add(targets, pos)
